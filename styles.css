@@ -1,0 +1,327 @@
+body {
+  margin: 0;
+  background: #def;
+  font-family: sans-serif;
+}
+
+a {
+  color: #026;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h3 {
+  color: #026;
+  border-bottom: 1px solid #cdf;
+}
+
+input, textarea {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid #06a;
+}
+
+input:focus, textarea:focus {
+  outline: inherit;
+}
+
+input:invalid {
+  color: #f00;
+}
+
+button {
+  font-weight: bold;
+  padding: 0.75em 1.25em;
+  background: #26c;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 0.5em;
+}
+
+button:disabled {
+  background: #ccc !important;
+}
+
+button:not(:disabled):hover {
+  cursor: pointer;
+  background: #06a;
+}
+
+#main-column {
+  display: flex;
+  flex-direction: column;
+  width: 30em;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 0 1em;
+  background: #fff;
+  box-shadow: 3px 0 3px #888, -3px 0 3px #888;
+}
+
+body:not([page="registration"]) #page-registration {
+  display: none;
+}
+
+body:not([page="messages"]) #page-messages {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  body, input, button, table {
+    font-size: 24pt;
+  }
+
+  #main-column {
+    width: 100%;
+    margin: none;
+  }
+}
+
+p#ver-status {
+  text-align: center;
+}
+
+table#bio {
+  margin: 0 auto;
+}
+
+table#bio input {
+  max-width: 10em;
+}
+
+table#bio td {
+  padding: 0.25em;
+}
+
+table#bio td:first-child {
+  font-weight: bold;
+  color: #124;
+}
+
+table#bio th {
+  color: #026;
+}
+
+#account {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#acc-headlines>input {
+  margin: 0.5em;
+  display: block;
+}
+
+#acc-img {
+  width: 8em;
+  height: 8em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+p#balance {
+  text-align: center;
+}
+
+button#register {
+  margin: 1em auto;
+  display: block;
+}
+
+#status {
+  color: #f00;
+  font-size: 0.75em;
+  text-align: center;
+}
+
+#tos-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#tos-line a {
+  margin-left: 0.25em;
+}
+
+#tos-checkbox {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
+}
+
+#footer {
+  color: #aaa;
+  font-size: 0.75em;
+  padding: 0.5em 0;
+  display: flex;
+  flex-direction: row;
+}
+
+#footer a {
+  color: #aaa;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#footer #spacer {
+  flex: 1;
+}
+
+#footer #logo {
+  font-weight: bold;
+}
+
+#acc-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding-top: 0.5em;
+  color: #aaa;
+}
+
+#hdr-img {
+  width: 2em;
+  height: 2em;
+  border-radius: 0.5em;
+}
+
+#hdr-name, #hdr-title, #hdr-balance {
+  margin: 0 0.5em;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: #124;
+}
+
+#page-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#cur-msg {
+  width: 60%;
+}
+
+#page-messages .summary {
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #124;
+}
+
+#page-messages .centered {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#cur-msg:not([type="match"]) #msg-match {
+  display: none;
+}
+
+#cur-msg:not([type="verification"]) #msg-verification {
+  display: none;
+}
+
+.usercard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.usercard>div {
+  margin: 0.5em;
+  display: block;
+}
+
+.usercard>div>div {
+  padding: 0.25em;
+}
+
+.usercard img {
+  width: 8em;
+  height: 8em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+#msg-match .buttons {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+#msg-match button {
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+}
+
+#msg-match button.no {
+  background: #c02;
+}
+
+#msg-match button.no:hover {
+  background: #a01;
+}
+
+#msg-match textarea {
+  width: 100%;
+  height: 10em;
+}
+
+#msg-match .timer {
+  text-align: center;
+  font-size: 0.75em;
+}
+
+#msg-match .cancel {
+  cursor: pointer;
+}
+
+#msg-match[stage="2"] p.intro {
+  display: none;
+}
+
+#msg-match:not([stage="2"]) p.resp {
+  display: none;
+}
+
+#msg-match:not([stage="2"]) p.inbox {
+  display: none;
+}
+
+#msg-match p.inbox {
+  font-style: italic;
+}
+
+#msg-match[stage="0"] textarea {
+  display: none;
+}
+
+#msg-match:not([stage="0"]) button.yes {
+  display: none;
+}
+
+#msg-match:not([stage="0"]) p.accept {
+  display: none;
+}
+
+#msg-match[stage="0"] p.reject {
+  display: none;
+}
+
+#msg-match[stage="0"] button.send {
+  display: none;
+}

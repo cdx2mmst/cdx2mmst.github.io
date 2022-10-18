@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>Registration | Demo</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+  </head>
+  <body page="about">
+    <div id="main-column">
+      <div id="page-registration">
+        <h3>Account verification</h3>
+        <p><b class="ver-code">000000</b>. Send this code in the email subject to <a class="ver-addr">000000@demo.org</a> from your <i>corporate</i> email. You must be at least 21, employed and live in the US in order to use this site.
+
+        <p id="ver-status">Status: <b>Unverified</b>
+
+        <p>You may create an account first and verify it later.
+
+        <h3>Search preferences</h3>
+        <p>This information won't be visible to public. Please, be honest with yourself and others: lying to boost your visibility will get your account banned.
+
+        <table id="bio">
+          <tr><th><th>You<th title="That's who you are interested in">They
+          <tr id="bio-sex"><td>Sex
+            <td><input list="list-mf" id="acc_sex1" pattern="M|F" required />
+            <td><input list="list-mf" id="acc_sex2" pattern="M|F" required />
+          <tr id="bio-age"><td>Age
+            <td><input type="number" min="21" max="80" value="30" id="acc_age1" required>
+            <td><input type="text" list="list-age-range" pattern="\d+-\d+" id="acc_age2" required>
+          <tr id="bio-edu"><td>Education
+            <td><input list="list-edu" id="acc_edu1" required/>
+            <td><input list="list-edu" id="acc_edu2" required/>
+          <tr id="bio-income"><td>Income
+            <td><input list="list-income" id="acc_inc1" required />
+            <td><input list="list-income" id="acc_inc2" required />
+          <tr id="bio-physique"><td>Physique
+            <td><input list="list-phys" id="acc_fit1" required />
+            <td><input list="list-phys" id="acc_fit2" required />
+        </table>
+
+        <p>Note, that we do not offer the traditional search functionality, so specifying an overly broad search criteria will do you a disservice.
+
+        <datalist id="list-mf">
+          <option value="M"></option>
+          <option value="F"></option>
+        </datalist>
+
+        <datalist id="list-age-range">
+          <option value="20-25"></option>
+          <option value="25-30"></option>
+          <option value="30-35"></option>
+          <option value="35-40"></option>
+          <option value="40-50"></option>
+        </datalist>
+
+        <datalist id="list-edu">
+          <option value="N/A"></option>
+          <option value="BS"></option>
+          <option value="MS"></option>
+          <option value="PhD"></option>
+        </datalist>
+
+        <datalist id="list-phys">
+          <option value="N/A"></option>
+          <option value="Slim"></option>
+          <option value="Fit"></option>
+          <option value="Pro"></option>
+        </datalist>
+
+        <datalist id="list-income">
+          <option value="N/A"></option>
+          <option value="$100K+"></option>
+          <option value="$200K+"></option>
+          <option value="$300K+"></option>
+          <option value="$500K+"></option>
+          <option value="$1M+"></option>
+        </datalist>
+
+        <h3>Profile</h3>
+        <p>Your profile will be shown only to those with whom you have <i>mutually</i> matching search preferences. Others won't be able to see or find you.
+        
+        <div id="account">
+          <img id="acc-img" alt="Photo">
+          <input id="img-input" type="file" accept="image/*" style="display:none">
+          <canvas id="img-canvas" width="256" height="256" style="display:none"></canvas>
+
+          <div id="acc-headlines">
+            <input id="acc_name" type="text" maxlength="64" placeholder="Your name" required>
+            <input id="acc_title" type="text" maxlength="64" placeholder="Headline, e.g. VP of Hiking" required>
+            <input id="acc_linkedin" type="url" maxlength="64" placeholder="https://www.linkedin.com/in/..." pattern="https://linkedin\.com/in/[\w-\d]+">
+          </div>
+        </div>
+
+        <h3>Balance</h3>
+        <p>We'll show your profile once a day for free to someone with mutually matching search preferences. For anything on top of that we charge $1 per match. Your remaining balance: <b>$0</b>. <a href="/pay">Add credit card</a>.
+
+        <div id="tos-line">
+          <input type="checkbox" id="tos-checkbox">
+          I have read and agreed to <a href="/tos">Terms of Service</a>.
+        </div>
+
+        <button id="register" disabled>Create Account</button>
+        <p id="status"></p>
+      </div> <!-- "page-registration" -->
+
+      <div id="page-messages">
+        <div id="acc-header">
+          <img id="hdr-img" alt="Photo">
+          <div id="hdr-name">?</div> | <div id="hdr-title">?</div> | <div id="hdr-balance">Balance: $0</div>
+        </div>
+        <p class="summary">0 messages, 0 matches, 1 service alert. Unread messages and matches expire in 1 month.
+        <div class="centered">
+          <div id="cur-msg" type="verification">
+            <div id="msg-verification">
+              <p><b class="ver-code">000000</b>. Send this code in the email subject to <a class="ver-addr">000000@demo.org</a> from your <i>corporate</i> email and wait for 24 hours.
+            </div> <!-- "msg-verification" -->
+
+            <div id="msg-match" stage="2">
+              <p class="intro">We've found you have mutually matching search preferences with this user.
+              <p class="resp">This user has sent you a message 2 days ago.
+              <div class="usercard">
+                <img alt="Photo">
+                <div>
+                  <div class="name">Name?</div>
+                  <div class="title">Title?</div>
+                  <div class="linkedin">LinkedIn?</div>
+                </div>
+              </div>
+              <p class="inbox">How are you doing?</p>
+              <textarea id="usr-message" maxlength="256" placeholder="Write your message"></textarea>
+              <p class="accept">Clicking Accept will notify the user and let him send you a message.
+              <p class="reject">Clicking Reject will make the user disappear from your inbox forever.
+              <div class="buttons">
+                <button class="yes">Accept</button>
+                <button class="send">Send</button>
+                <button class="no">Reject</button>
+              </div>
+              <p class="timer">You can still change your mind. <i class="remaining">9</i>... <u class="cancel">Cancel</u></p>
+            </div> <!-- "msg-match" -->
+          </div>
+        </div>
+      </div> <!-- "page-messages" -->
+
+      <div id="footer">
+        <div id="links"><a>About Us</a> | <a>Legal</a> | <a>Security</a> | <a>Contact Us</a></div>
+        <div id="spacer"></div>
+        <div id="logo">&#169; 2022 FooBar</div>
+      </div>
+    </div>
+  </body>
+</html>
