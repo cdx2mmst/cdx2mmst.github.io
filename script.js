@@ -11,23 +11,25 @@ let sample_queue = [
 ];
 
 window.onload = () => {
-  navigateToPage(localStorage._registered ?
+  setCurrentPage(localStorage._registered ?
     'messages' : 'registration');
 };
 
 function initRegistrationPage() {
   let img = $('#acc-img');
   img.onclick = () => selectImg();
-  img.src = localStorage.acc_img || '';
+  img.src = localStorage.acc_img || '/null';
   updateVerCode();
   loadInputData();
   document.body.onchange = (e) => saveInputData(e.target);
+  $('#tos-checkbox').checked = false;
   $('#tos-checkbox').onchange = (e) => updateTosCheckbox(e.target);
   $('#register').onclick = () => completeRegistration();
+  updateVerStatus();
 }
 
 function loadInputData() {
-  for (let input of document.querySelectorAll('input')) {
+  for (let input of document.querySelectorAll('input,select')) {
     let value = localStorage[input.id];
     if (value) input.value = value;
     input.checkValidity();
@@ -73,6 +75,20 @@ async function selectImg() {
   img.src = img_base64;
 }
 
+async function updateVerStatus() {
+  let code = localStorage.ver_code;
+  let addr = localStorage.ver_addr;
+  if (!code || !addr)
+    throw new Error('Ver code missing');
+  console.log('Checking verification status...');
+  let resp = await fetch('/me', {
+    method: 'GET',
+    headers: { 'Verification-Code': code + ':' + addr },
+  });
+  $('#ver-status-value').textContent =
+    resp.status == 200 ? 'Verified' : 'Unverified';
+}
+
 function updateVerCode(parent_el = $('#page-registration')) {
   let code = localStorage.ver_code ||
     [0, 1, 2, 3, 4, 5].map(x => Math.random() * 10 | 0).join('');
@@ -96,13 +112,27 @@ function updateTosCheckbox(input) {
 }
 
 function verifyUserInput() {
-  for (let input of document.querySelectorAll('input')) {
-    if (!input.validity.valid)
-      throw new Error('Fill out mandatory inputs: ' + input.id);
+  let valid = true;
+  let img = $('#acc-img');
+  let has_img = !!localStorage.acc_img;
+  img.classList.toggle('invalid', !has_img);
+  valid = valid && has_img;
+
+  for (let input of document.querySelectorAll('input,select')) {
+    let is_valid = input.validity.valid &&
+      (input.value || !input.required);
+    input.classList.toggle('invalid', !is_valid);
+    valid = valid && is_valid;
   }
+  if (!valid)
+    throw new Error('Fill out all required fields');
 }
 
-function navigateToPage(page) {
+function getCurrentPage() {
+  return document.body.getAttribute('page');
+}
+
+function setCurrentPage(page) {
   console.log('Opening page:', page);
   document.body.setAttribute('page', page);
   document.title = page[0].toUpperCase() + page.slice(1) + ' | Demo';
@@ -116,13 +146,12 @@ function navigateToPage(page) {
 }
 
 function initMessagesPage() {
-  $('#hdr-img').src = localStorage.acc_img;
-  $('#hdr-img').onclick = () => navigateToPage('registration');
+  $('#hdr-img').src = localStorage.acc_img || '/null';
+  $('#hdr-img').onclick = () => setCurrentPage('registration');
   $('#hdr-name').textContent = localStorage.acc_name;
-  $('#hdr-title').textContent = localStorage.acc_title;
   updateVerCode($('#msg-verification'));
 
-  $('#msg-match img').src = localStorage.acc_img;
+  $('#msg-match img').src = localStorage.acc_img || '/null';
   $('#msg-match .name').textContent = localStorage.acc_name;
   $('#msg-match .title').textContent = localStorage.acc_title;
   $('#msg-match .linkedin').textContent = localStorage.acc_linkedin || 'No linkedin URL';
@@ -177,7 +206,7 @@ async function completeRegistration() {
   try {
     verifyUserInput();
     localStorage._registered = 1;
-    navigateToPage('messages');
+    setCurrentPage('messages');
   } catch (err) {
     $('#status').textContent = err;
   }
@@ -187,7 +216,7 @@ async function registerAccount() {
   let json = JSON.stringify(localStorage);
   console.log('Reg data:', json.length, 'bytes');
 
-  let resp = await fetch('/acc', {
+  let resp = await fetch('/me', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: json,

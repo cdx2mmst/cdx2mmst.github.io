@@ -5,6 +5,7 @@
     <script src="script.js"></script>
   </head>
   <body page="about">
+    <div id="top-logo">FooBar &#169; 2022</div>
     <div id="main-column">
       <div id="page-registration">
         <h3>About us</h3>
@@ -15,7 +16,7 @@
         <h3>Account verification</h3>
         <p><b class="ver-code">000000</b>. Send this code in the email subject to <a class="ver-addr">000000@demo.org</a> from your <i>corporate</i> email. You must be at least 21, employed and live in the US in order to use this site.
 
-        <p id="ver-status">Status: <b>Unverified</b>
+        <p id="ver-status">Status: <b id="ver-status-value">Unverified</b>
 
         <p>You may create an account first and verify it later.
 
@@ -25,59 +26,58 @@
         <table id="bio">
           <tr><th><th>You<th title="That's who you are interested in">They
           <tr id="bio-sex"><td>Sex
-            <td><input list="list-mf" id="acc_sex1" pattern="M|F" required />
-            <td><input list="list-mf" id="acc_sex2" pattern="M|F" required />
+            <td>
+              <select id="acc_sex1" pattern="1|2" required>
+                <option value="">?</option>
+                <option value="1">M</option>
+                <option value="2">F</option>
+              </select>
+            <td>
+              <select id="acc_sex2" required>
+                <option value="">?</option>
+                <option value="1">M</option>
+                <option value="2">F</option>
+              </select>
           <tr id="bio-age"><td>Age
-            <td><input type="number" min="21" max="80" value="30" id="acc_age1" required>
-            <td><input type="text" list="list-age-range" pattern="\d+-\d+" id="acc_age2" required>
-          <tr id="bio-edu"><td>Education
-            <td><input list="list-edu" id="acc_edu1" required/>
-            <td><input list="list-edu" id="acc_edu2" required/>
+            <td><input type="number" min="21" max="80" id="acc_age1" required>
+            <td><input type="text" placeholder="e.g. 25-35" pattern="\d+-\d+" id="acc_age2" required>
           <tr id="bio-income"><td>Income
-            <td><input list="list-income" id="acc_inc1" required />
-            <td><input list="list-income" id="acc_inc2" required />
+            <td>
+              <select id="acc_inc1" required>
+                <option value="0">$0</option>
+                <option value="1">$100K</option>
+                <option value="2">$200K</option>
+                <option value="3">$300K</option>
+                <option value="5">$500K</option>
+                <option value="10">$1M</option>
+              </select>
+            <td>
+              <select id="acc_inc2" required>
+                <option value="0">$0</option>
+                <option value="1">$100K</option>
+                <option value="2">$200K</option>
+                <option value="3">$300K</option>
+                <option value="5">$500K</option>
+                <option value="10">$1M</option>
+              </select>
           <tr id="bio-physique"><td>Physique
-            <td><input list="list-phys" id="acc_fit1" required />
-            <td><input list="list-phys" id="acc_fit2" required />
+            <td>
+              <select id="acc_fit1" required>
+                <option value="0">N/A</option>
+                <option value="1">Slim</option>
+                <option value="2">Fit</option>
+                <option value="3">Pro</option>
+              </select>
+            <td>
+              <select id="acc_fit2" required>
+                <option value="0">N/A</option>
+                <option value="1">Slim</option>
+                <option value="2">Fit</option>
+                <option value="3">Pro</option>
+              </select>
         </table>
 
         <p>Note, that we do not offer the traditional search functionality, so specifying an overly broad search criteria will do you a disservice.
-
-        <datalist id="list-mf">
-          <option value="M"></option>
-          <option value="F"></option>
-        </datalist>
-
-        <datalist id="list-age-range">
-          <option value="20-25"></option>
-          <option value="25-30"></option>
-          <option value="30-35"></option>
-          <option value="35-40"></option>
-          <option value="40-50"></option>
-        </datalist>
-
-        <datalist id="list-edu">
-          <option value="N/A"></option>
-          <option value="BS"></option>
-          <option value="MS"></option>
-          <option value="PhD"></option>
-        </datalist>
-
-        <datalist id="list-phys">
-          <option value="N/A"></option>
-          <option value="Slim"></option>
-          <option value="Fit"></option>
-          <option value="Pro"></option>
-        </datalist>
-
-        <datalist id="list-income">
-          <option value="N/A"></option>
-          <option value="$100K+"></option>
-          <option value="$200K+"></option>
-          <option value="$300K+"></option>
-          <option value="$500K+"></option>
-          <option value="$1M+"></option>
-        </datalist>
 
         <h3>Profile</h3>
         <p>Your profile will be shown only to those with whom you have <i>mutually</i> matching search preferences. Others won't be able to see or find you.
@@ -109,9 +109,11 @@
       <div id="page-messages">
         <div id="acc-header">
           <img id="hdr-img" alt="Photo">
-          <div id="hdr-name">?</div> | <div id="hdr-title">?</div> | <div id="hdr-balance">Balance: $0</div>
+          <div>
+            <div id="hdr-name">?</div>
+            <div id="hdr-balance">$0 left</div>
+          </div>
         </div>
-        <p class="summary">0 messages, 0 matches, 1 service alert. Unread messages and matches expire in 1 month.
         <div class="centered">
           <div id="cur-msg" type="verification">
             <div id="msg-verification">
@@ -147,7 +149,7 @@
       <div id="footer">
         <div id="links"><a>About Us</a> | <a>Legal</a> | <a>Security</a> | <a>Contact Us</a></div>
         <div id="spacer"></div>
-        <div id="logo">&#169; 2022 FooBar</div>
+        <div id="logo">FooBar &#169; 2022</div>
       </div>
     </div>
   </body>

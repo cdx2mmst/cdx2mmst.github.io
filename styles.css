@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: #def;
+  background: #fff;
   font-family: sans-serif;
 }
 
@@ -19,7 +19,7 @@ h3 {
   border-bottom: 1px solid #cdf;
 }
 
-input, textarea {
+input, textarea, select {
   padding: 0.5em;
   border-radius: 0.5em;
   border: 1px solid #06a;
@@ -29,8 +29,8 @@ input:focus, textarea:focus {
   outline: inherit;
 }
 
-input:invalid {
-  color: #f00;
+.invalid {
+  border: 1px solid #f00;
 }
 
 button {
@@ -60,7 +60,8 @@ button:not(:disabled):hover {
   margin: 0 auto;
   padding: 0 1em;
   background: #fff;
-  box-shadow: 3px 0 3px #888, -3px 0 3px #888;
+  box-shadow: 3px 0 6px #ccc, -3px 0 6px #ccc;
+  box-shadow: none;
 }
 
 body:not([page="registration"]) #page-registration {
@@ -71,14 +72,28 @@ body:not([page="messages"]) #page-messages {
   display: none;
 }
 
+#top-logo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 1em;
+  font-weight: bold;
+  color: #124;
+  display: none;
+}
+
 @media (orientation: portrait) {
-  body, input, button, table {
+  body, input, button, table, select {
     font-size: 24pt;
   }
 
   #main-column {
     width: 100%;
     margin: none;
+  }
+
+  #top-logo {
+    display: none;
   }
 }
 
@@ -90,8 +105,8 @@ table#bio {
   margin: 0 auto;
 }
 
-table#bio input {
-  max-width: 10em;
+table#bio input, table#bio select {
+  width: 10em;
 }
 
 table#bio td {
@@ -181,25 +196,30 @@ button#register {
 }
 
 #acc-header {
+  position: fixed;
+  right: 0;
+  top: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: left;
-  padding-top: 0.5em;
-  color: #aaa;
+  padding: 0.5em;
+  color: #124;
 }
 
 #hdr-img {
   width: 2em;
   height: 2em;
   border-radius: 0.5em;
+  cursor: pointer;
 }
 
-#hdr-name, #hdr-title, #hdr-balance {
-  margin: 0 0.5em;
-  font-weight: bold;
+#hdr-name, #hdr-balance {
+  padding-left: 0.5em;
   font-size: 0.75em;
-  color: #124;
+}
+
+#hdr-name {
+  font-weight: bold;
 }
 
 #page-messages {
@@ -209,13 +229,7 @@ button#register {
 }
 
 #cur-msg {
-  width: 60%;
-}
-
-#page-messages .summary {
-  font-size: 0.75em;
-  font-weight: bold;
-  color: #124;
+  width: 80%;
 }
 
 #page-messages .centered {
@@ -248,6 +262,10 @@ button#register {
 
 .usercard>div>div {
   padding: 0.25em;
+}
+
+.usercard .name {
+  font-weight: bold;
 }
 
 .usercard img {
